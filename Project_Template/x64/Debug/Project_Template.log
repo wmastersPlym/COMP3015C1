@@ -1,8 +1,6 @@
-﻿  glad.c
-  glslprogram.cpp
-  glutils.cpp
-  main.cpp
-  scenebasic_uniform.cpp
-  Generating Code...
-  LINK : E:\Documents\GitHub\COMP3015C1\Project_Template\x64\Debug\Project_Template.exe not found or not built by the last incremental link; performing full link
-  Project_Template.vcxproj -> E:\Documents\GitHub\COMP3015C1\Project_Template\x64\Debug\Project_Template.exe
+﻿torus.obj : error LNK2019: unresolved external symbol "protected: virtual void __cdecl TriangleMesh::initBuffers(class std::vector<unsigned int,class std::allocator<unsigned int> > *,class std::vector<float,class std::allocator<float> > *,class std::vector<float,class std::allocator<float> > *,class std::vector<float,class std::allocator<float> > *,class std::vector<float,class std::allocator<float> > *)" (?initBuffers@TriangleMesh@@MEAAXPEAV?$vector@IV?$allocator@I@std@@@std@@PEAV?$vector@MV?$allocator@M@std@@@3@111@Z) referenced in function "public: __cdecl Torus::Torus(float,float,unsigned int,unsigned int)" (??0Torus@@QEAA@MMII@Z)
+torus.obj : error LNK2001: unresolved external symbol "protected: virtual void __cdecl TriangleMesh::deleteBuffers(void)" (?deleteBuffers@TriangleMesh@@MEAAXXZ)
+torus.obj : error LNK2019: unresolved external symbol "public: virtual __cdecl TriangleMesh::~TriangleMesh(void)" (??1TriangleMesh@@UEAA@XZ) referenced in function "int `public: __cdecl Torus::Torus(float,float,unsigned int,unsigned int)'::`1'::dtor$0" (?dtor$0@?0???0Torus@@QEAA@MMII@Z@4HA)
+scenebasic_uniform.obj : error LNK2001: unresolved external symbol "public: virtual __cdecl TriangleMesh::~TriangleMesh(void)" (??1TriangleMesh@@UEAA@XZ)
+torus.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl TriangleMesh::render(void)const " (?render@TriangleMesh@@UEBAXXZ)
+E:\Documents\GitHub\COMP3015C1\Project_Template\x64\Debug\Project_Template.exe : fatal error LNK1120: 4 unresolved externals
