@@ -13,6 +13,7 @@ using std::cerr;
 using std::endl;
 
 #include "helper/glutils.h"
+#include "helper/texture.h"
 
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -29,22 +30,14 @@ void SceneBasic_Uniform::initScene()
     compile();
     glEnable(GL_DEPTH_TEST);
 
+    
 
     
 
     view = glm::lookAt(vec3(0.0f, 0.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
     projection = mat4(1.0f);
 
-    float x, z;
-
-    for (int i = 0; i < 3; i++) {
-        std::stringstream name;
-        name << "Lights[" << i << "].Position";
-        x = 2.0f * cosf((glm::two_pi<float>() / 3) * i);
-        z = 2.0f * sinf((glm::two_pi<float>() / 3) * i);
-        prog.setUniform(name.str().c_str(), view * glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
-        std::cout << "Light( " + std::to_string(i) + ") -> X: " + std::to_string(x) + ", Z: " + std::to_string(z) + "." << std::endl;
-    }
+    
     
     prog.setUniform("lights[0].L", vec3(0.0f, 0.0f, 0.8f));
     prog.setUniform("lights[1].L", vec3(0.0f, 0.8f, 0.0f));
@@ -54,8 +47,11 @@ void SceneBasic_Uniform::initScene()
     prog.setUniform("lights[1].La", vec3(0.0f, 0.2f, 0.0f));
     prog.setUniform("lights[2].La", vec3(0.2f, 0.0f, 0.0f));
     
+    GLuint wood = Texture::loadTexture("../project_Template/media/texture/hardwood2_diffuse.jpg");
 
-
+    // Load brick texture file into channel 0
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, wood);
     
 }
 
@@ -92,6 +88,15 @@ void SceneBasic_Uniform::render()
     model = mat4(1.0f);
     model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.0f, 0.0f));
 
+    float x, z;
+    for (int i = 0; i < 3; i++) {
+        std::stringstream name;
+        name << "Lights[" << i << "].Position";
+        x = 2.0f * cosf((glm::two_pi<float>() / 3) * i);
+        z = 2.0f * sinf((glm::two_pi<float>() / 3) * i);
+        prog.setUniform(name.str().c_str(), view * glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
+        //std::cout << "Light( " + std::to_string(i) + ") -> X: " + std::to_string(x) + ", Z: " + std::to_string(z) + "." << std::endl;
+    }
 
     setMatrices();
 

@@ -2,6 +2,7 @@
 
 in vec3 Position;
 in vec3 Normal;
+in vec2 TexCoord;
 
 uniform struct LightInfo {
     vec4 Position;  // Light position in eye coords.
@@ -18,9 +19,13 @@ uniform struct MaterialInfo {
 
 uniform vec3 cameraPos;
 
+layout (binding =0) uniform sampler2D Tex1;
+
+
 layout (location = 0) out vec4 FragColour;
 
 vec3 blinnPhong(vec3 pos, vec3 n) {
+    vec3 texColour = texture(Tex1, TexCoord).rgb;
 
     vec3 Pf = vec3(0.0f);
     for(int i=0; i< 3; i++) {
@@ -29,7 +34,7 @@ vec3 blinnPhong(vec3 pos, vec3 n) {
 
 
         // Ambient
-        vec3 ambient = lights[i].La * Material.Ka;
+        vec3 ambient = lights[i].La * texColour;
 
         // Diffuse
         vec3 diffuse = Material.Kd * sDotN;
