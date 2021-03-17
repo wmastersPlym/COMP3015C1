@@ -14,16 +14,15 @@
 class SceneBasic_Uniform : public Scene
 {
 private:
-    //GLuint vaoHandle;
-
-    GLSLProgram prog;
-
-    Torus torus;
     float angle;
 
-
+    Torus torus;
+    GLSLProgram prog;
 
     void compile();
+    void setMatrices();
+
+    glm::mat4 rotationMatrix;
 
 public:
     SceneBasic_Uniform();

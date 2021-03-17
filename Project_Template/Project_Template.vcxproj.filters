@@ -42,8 +42,14 @@
     <ClCompile Include="scenebasic_uniform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="helper\teapot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="helper\torus.cpp">
-      <Filter>helper</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\trianglemesh.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +59,8 @@
     <None Include="shader\basic_uniform.vert">
       <Filter>shaders</Filter>
     </None>
+    <None Include="shader\Blinn-Phong.frag" />
+    <None Include="shader\Blinn-Phong.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper\scene.h">
@@ -76,8 +84,20 @@
     <ClInclude Include="scenebasic_uniform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="helper\teapot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\teapotdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="helper\torus.h">
-      <Filter>helper</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\trianglemesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\drawable.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
