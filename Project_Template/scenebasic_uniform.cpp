@@ -43,6 +43,7 @@ void SceneBasic_Uniform::initScene()
         x = 2.0f * cosf((glm::two_pi<float>() / 3) * i);
         z = 2.0f * sinf((glm::two_pi<float>() / 3) * i);
         prog.setUniform(name.str().c_str(), view * glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
+        std::cout << "Light( " + std::to_string(i) + ") -> X: " + std::to_string(x) + ", Z: " + std::to_string(z) + "." << std::endl;
     }
     
     prog.setUniform("lights[0].L", vec3(0.0f, 0.0f, 0.8f));
@@ -73,33 +74,33 @@ void SceneBasic_Uniform::compile()
 
 void SceneBasic_Uniform::update( float t )
 {
-    //angle += 0.01f;
+    angle += 0.4f;
 	//update your angle here
-    //if (angle > 360.0f) {
-    //    angle -= 360.0f;
-    //}
+    if (angle > 360.0f) {
+        angle -= 360.0f;
+    }
     
 }   
 
 void SceneBasic_Uniform::render()
 {
-    float angle = -45.0f;
+    //float angle = -30.0f;
 
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
 
     model = mat4(1.0f);
-    model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(-45.0f), vec3(1.0f, 0.0f, 0.0f));
 
 
     setMatrices();
 
     torus.render();
 
-    prog.setUniform("Material.Kd", 0.4f, 0.4f, 0.4f);
-    prog.setUniform("Material.Ks", 0.9f, 0.9f, 0.9f);
-    prog.setUniform("Material.Ka", 0.5f, 0.5f, 0.5f);
-    prog.setUniform("Material.Shininess", 180.0f);
+    prog.setUniform("Material.Kd", 0.4f, 0.2f, 0.2f);
+    prog.setUniform("Material.Ks", 0.9f, 0.45f, 0.45f);
+    prog.setUniform("Material.Ka", 0.5f, 0.25f, 0.25f);
+    prog.setUniform("Material.Shininess", 200.0f);
     
 }
 
