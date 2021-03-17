@@ -19,14 +19,18 @@ uniform struct MaterialInfo {
 
 uniform vec3 cameraPos;
 
-layout (binding =0) uniform sampler2D Tex1;
+layout (binding = 0) uniform sampler2D Tex1;
+layout (binding = 1) uniform sampler2D Tex2;
 
 
 layout (location = 0) out vec4 FragColour;
 
 vec3 blinnPhong(vec3 pos, vec3 n) {
-    vec3 texColour = texture(Tex1, TexCoord).rgb;
-
+    // Get Mix texture colours
+    vec4 texColour1 = texture(Tex1, TexCoord);
+    vec4 texColour2 = texture(Tex2, TexCoord);
+    vec3 texCol = mix(texColour1.rgb, texColour2.rgb, texColour2.a);
+    
     vec3 Pf = vec3(0.0f);
     for(int i=0; i< 3; i++) {
         vec3 s = normalize(vec3(lights[i].Position) - pos);
@@ -34,7 +38,7 @@ vec3 blinnPhong(vec3 pos, vec3 n) {
 
 
         // Ambient
-        vec3 ambient = lights[i].La * texColour;
+        vec3 ambient = lights[i].La * texCol;
 
         // Diffuse
         vec3 diffuse = Material.Kd * sDotN;

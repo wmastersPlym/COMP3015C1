@@ -47,11 +47,18 @@ void SceneBasic_Uniform::initScene()
     prog.setUniform("lights[1].La", vec3(0.0f, 0.2f, 0.0f));
     prog.setUniform("lights[2].La", vec3(0.2f, 0.0f, 0.0f));
     
-    GLuint wood = Texture::loadTexture("../project_Template/media/texture/hardwood2_diffuse.jpg");
 
-    // Load brick texture file into channel 0
+    GLuint wood = Texture::loadTexture("../project_Template/media/texture/hardwood2_diffuse.jpg");
+    GLuint moss = Texture::loadTexture("../project_Template/media/texture/moss.png");
+
+    // Load wood texture file into channel 0
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, wood);
+
+    
+    // Load moss texture file into channel 1
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, moss);
     
 }
 
