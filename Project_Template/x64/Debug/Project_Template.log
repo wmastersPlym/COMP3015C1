@@ -1,3 +1,4 @@
 ﻿  scenebasic_uniform.cpp
 E:\Documents\GitHub\COMP3015C1\Project_Template\scenebasic_uniform.h(12,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Documents\GitHub\COMP3015C1\Project_Template\scenebasic_uniform.h(13,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Project_Template.vcxproj -> E:\Documents\GitHub\COMP3015C1\Project_Template\x64\Debug\Project_Template.exe

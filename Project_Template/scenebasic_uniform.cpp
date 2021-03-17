@@ -34,9 +34,20 @@ void SceneBasic_Uniform::initScene()
 
     
 
-    view = glm::lookAt(vec3(0.0f, 0.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+    //view = glm::lookAt(vec3(0.0f, 0.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+    view = glm::lookAt(vec3(0.5f, 0.75f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+
     projection = mat4(1.0f);
 
+    float x, z;
+    for (int i = 0; i < 3; i++) {
+        std::stringstream name;
+        name << "Lights[" << i << "].Position";
+        x = 2.0f * cosf((glm::two_pi<float>() / 3) * i);
+        z = 2.0f * sinf((glm::two_pi<float>() / 3) * i);
+        prog.setUniform(name.str().c_str(), view * glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
+        std::cout << "Light( " + name.str() + ") -> X: " + std::to_string(x) + ", Z: " + std::to_string(z) + "." << std::endl;
+    }
     
     
     prog.setUniform("lights[0].L", vec3(0.0f, 0.0f, 0.8f));
@@ -92,27 +103,19 @@ void SceneBasic_Uniform::render()
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    model = mat4(1.0f);
-    model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.0f, 0.0f));
+    prog.setUniform("Material.Kd", 0.4f, 0.2f, 0.2f);
+    prog.setUniform("Material.Ks", 0.9f, 0.45f, 0.45f);
+    prog.setUniform("Material.Ka", 0.5f, 0.25f, 0.25f);
+    prog.setUniform("Material.Shininess", 10.0f);
 
-    float x, z;
-    for (int i = 0; i < 3; i++) {
-        std::stringstream name;
-        name << "Lights[" << i << "].Position";
-        x = 2.0f * cosf((glm::two_pi<float>() / 3) * i);
-        z = 2.0f * sinf((glm::two_pi<float>() / 3) * i);
-        prog.setUniform(name.str().c_str(), view * glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
-        //std::cout << "Light( " + std::to_string(i) + ") -> X: " + std::to_string(x) + ", Z: " + std::to_string(z) + "." << std::endl;
-    }
+    model = mat4(1.0f);
+    model = glm::rotate(model, glm::radians(angle), vec3(0.0f, 1.0f, 0.0f));
 
     setMatrices();
 
     torus.render();
 
-    prog.setUniform("Material.Kd", 0.4f, 0.2f, 0.2f);
-    prog.setUniform("Material.Ks", 0.9f, 0.45f, 0.45f);
-    prog.setUniform("Material.Ka", 0.5f, 0.25f, 0.25f);
-    prog.setUniform("Material.Shininess", 200.0f);
+    
     
 }
 
@@ -128,8 +131,9 @@ void SceneBasic_Uniform::resize(int w, int h)
 void SceneBasic_Uniform::setMatrices() {
     mat4 mv = model * view;
 
-    prog.setUniform("cameraPos", vec3(0.0f, 0.0f, 2.0f));
-
+    //prog.setUniform("cameraPos", vec3(0.0f, 0.0f, 2.0f));
+    prog.setUniform("cameraPos", vec3(0.5f, 0.75f, 2.0f));
+    
     prog.setUniform("ModelViewMatrix", mv);
     prog.setUniform("NormalMatrix", glm::mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
     prog.setUniform("MVP", projection * view * model);

@@ -10,11 +10,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "helper/torus.h";
+#include "helper/plane.h";
 
 class SceneBasic_Uniform : public Scene
 {
 private:
     float angle;
+    //Plane plane;
 
     Torus torus;
     GLSLProgram prog;

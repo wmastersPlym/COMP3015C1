@@ -33,21 +33,24 @@ vec3 blinnPhong(vec3 pos, vec3 n) {
     
     vec3 Pf = vec3(0.0f);
     for(int i=0; i< 3; i++) {
+        // light dir
         vec3 s = normalize(vec3(lights[i].Position) - pos);
         float sDotN = max(dot(s,n), 0.0f);
 
 
         // Ambient
         vec3 ambient = lights[i].La * texCol;
+        //vec3 ambient = vec3(0.0f);
 
         // Diffuse
         vec3 diffuse = Material.Kd * sDotN;
+        //vec3 diffuse = vec3(0.0f);
 
         // Specular
         vec3 spec = vec3(0.0f);
 
         if(sDotN > 0.0f) {
-            vec3 v = normalize(-cameraPos.xyz);
+            vec3 v = normalize(cameraPos.xyz - pos);
             //r
             vec3 h = normalize (v + s);
             spec = Material.Ks * pow(max(dot(h,n), 0.0f), Material.Shininess);
