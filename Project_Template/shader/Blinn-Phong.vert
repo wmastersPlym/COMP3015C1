@@ -19,9 +19,6 @@ uniform struct MaterialInfo {
 } Material;
 
 
-uniform vec4 LightPosition;
-uniform vec3 Kd;
-uniform vec3 Ld;
 
 
 uniform mat4 ModelViewMatrix;
