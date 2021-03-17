@@ -38,13 +38,13 @@ vec3 blinnPhong(vec3 pos, vec3 n) {
         vec3 spec = vec3(0.0f);
 
         if(sDotN > 0.0f) {
-            vec3 v = normalize(-pos.xyz);
+            vec3 v = normalize(-cameraPos.xyz);
             //r
             vec3 h = normalize (v + s);
             spec = Material.Ks * pow(max(dot(h,n), 0.0f), Material.Shininess);
         }
 
-        Pf += ambient + lights[i].L * (diffuse + spec);
+        Pf += (ambient + lights[i].L * (diffuse + spec));
     }
 
     

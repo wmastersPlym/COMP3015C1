@@ -90,7 +90,7 @@ void SceneBasic_Uniform::render()
     glClear(GL_DEPTH_BUFFER_BIT);
 
     model = mat4(1.0f);
-    model = glm::rotate(model, glm::radians(-45.0f), vec3(1.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.0f, 0.0f));
 
 
     setMatrices();
@@ -116,7 +116,7 @@ void SceneBasic_Uniform::resize(int w, int h)
 void SceneBasic_Uniform::setMatrices() {
     mat4 mv = model * view;
 
-    prog.setUniform("cameraPos", vec3(0.0f, 0.0f, 0.0f));
+    prog.setUniform("cameraPos", vec3(0.0f, 0.0f, 2.0f));
 
     prog.setUniform("ModelViewMatrix", mv);
     prog.setUniform("NormalMatrix", glm::mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
